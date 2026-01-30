@@ -3,6 +3,7 @@
   import jakarta.persistence.Entity;
   import jakarta.persistence.Table;
   import jakarta.persistence.Column;
+  import jakarta.persistence.OneToMany;
   import jakarta.persistence.Id;
   import jakarta.persistence.GeneratedValue;
   import jakarta.persistence.GenerationType;
@@ -10,7 +11,8 @@
   import lombok.AccessLevel;
  import lombok.AllArgsConstructor;
  import java.io.Serializable;
- 
+import java.util.List;
+
  //@Getter
  //@Setter
  @AllArgsConstructor
@@ -31,6 +33,9 @@
 @Column(length=100)
  private String descricao;
 
+@OneToMany(mappedBy="disciplina")
+private List<AproveitamentoEntity> aproveitamentos;
+
  public String getDescricao() {
       return this.descricao;
  }
@@ -50,6 +55,17 @@
  public void setNome(String nome){
  this.nome=nome;
  }
+
+
+public List<AproveitamentoEntity> getAproveitamentos(){
+return aproveitamentos;
+}
+
+public void  setAproveitamentos(List<AproveitamentoEntity> aproveitamentos){
+this.aproveitamentos= aproveitamentos;
+}
+
+
 
 
 }
