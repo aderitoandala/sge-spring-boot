@@ -2,6 +2,7 @@ package com.mz.sge.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
+  import jakarta.persistence.OneToMany;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,9 +10,10 @@ import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import java.io.Serializable;
-import com.mz.sge.enums.Sexo;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.EnumType;
+import com.mz.sge.enums.Sexo;
+import java.util.List;
 
 
 //@Getter
@@ -38,13 +40,16 @@ private String email;
 @Column(nullable=false)
 private Sexo sexo;
 
+@OneToMany(mappedBy= "aluno")
+private List<AproveitamentoEntity> aproveitamentos;
+
 public Sexo getSexo() {
      return this.sexo;
 }
 
 public void setSexo(Sexo sexo) {
      this.sexo=sexo;
-} 
+}
 
 public Long getId() {
     return this.id;
@@ -66,6 +71,16 @@ this.nome=nome;
 public void setEmail(String email){
 this.email=email;
 }
+
+public List<AproveitamentoEntity> getAproveitamentos(){
+return aproveitamentos;
+}
+
+public void  setAproveitamentos(List<AproveitamentoEntity> aproveitamentos){
+ this.aproveitamentos=aproveitamentos;
+}
+
+
 
 
 
