@@ -13,11 +13,12 @@ import lombok.AllArgsConstructor;
 import java.io.Serializable;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.EnumType;
+import jakarta.persistence.UniqueConstraint;
 
 @NoArgsConstructor(access=AccessLevel.PUBLIC)
 @AllArgsConstructor
 @Entity
-@Table(name="APROVEITAMENTO")
+@Table(name="APROVEITAMENTO",uniqueConstraints={@UniqueConstraint(name="uk_aluno_disciplina_semestre",columnNames={"aluno_id","disciplina_id","semestre"})})
 public class AproveitamentoEntity implements Serializable {
 
 public static final long serialVersionUID=1L;
