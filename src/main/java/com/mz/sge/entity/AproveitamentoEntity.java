@@ -44,6 +44,13 @@ private Double nota1;
 @Column(nullable=false)
 private Double nota2;
 
+public Long getId(){
+return id;
+}
+
+public void setId(Long id){
+this.id=id;
+}
 
 public AlunoEntity getAluno(){
 return aluno;
