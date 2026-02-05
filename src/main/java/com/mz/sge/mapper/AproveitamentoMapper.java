@@ -3,18 +3,11 @@ import com.mz.sge.entity.AproveitamentoEntity;
 import com.mz.sge.dto.AproveitamentoResponseDTO;
 import com.mz.sge.dto.AproveitamentoRequestDTO;
 import com.mz.sge.enums.Situacao;
+import com.mz.sge.entity.AlunoEntity;
+import com.mz.sge.entity.DisciplinaEntity;
 
 public class AproveitamentoMapper{
 
-public static AproveitamentoEntity toEntity(AproveitamentoRequestDTO dto){
-AproveitamentoEntity ap=new AproveitamentoEntity();
-ap.getAluno().setId(dto.getAlunoId());
-ap.getDisciplina().setId(dto.getDisciplinaId());
-ap.setSemestre(dto.getSemestre());
-ap.setNota1(dto.getNota1());
-ap.setNota2(dto.getNota2());
-return ap;
-}
 
 public static AproveitamentoResponseDTO toDTO(AproveitamentoEntity ap){
 Double media=null;
