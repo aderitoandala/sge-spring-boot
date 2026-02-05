@@ -52,7 +52,7 @@ public ResponseEntity<AproveitamentoResponseDTO> actualizar(@PathVariable Long i
 return ResponseEntity.ok(aproveitamentoService.actualizar(id,dto));
 }
 
-@DeleteMapping("/{id}")
+@DeleteMapping("/apagar/{id}")
 public ResponseEntity<Void> apagar(@PathVariable Long id){
 aproveitamentoService.apagar(id);
 return ResponseEntity.noContent().build();
