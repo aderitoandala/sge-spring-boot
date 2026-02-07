@@ -9,6 +9,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import java.util.Map;
 import java.util.HashMap;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import com.mz.sge.dto.ApiValidationErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 
@@ -54,7 +55,13 @@ e.getBindingResult().getFieldErrors().forEach(field -> fields.put(field.getField
 
 return
 ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiValidationErrorResponse(HttpStatus.BAD_REQUEST.value(),"Bad Request","Houve falha na validação de um ou  mais campos",fields,r.getRequestURI()));
+}
 
+//Bad request - erro de conversão de tipos
+@ExceptionHandler(MethodArgumentTypeMismatchException.class)
+public ResponseEntity<ApiErrorResponse> erroConversaoTiposHandler(MethodArgumentTypeMismatchException e,HttpServletRequest r){
+log.warn("erro de conversão de tipos.caminho:{}",r.getRequestURI(),e);
+return ResponseEntity.badRequest().body(new ApiErrorResponse(HttpStatus.BAD_REQUEST.value(),"Bad Request","dado inválido para o campo"+" "+e.getName(),r.getRequestURI()));
 
 }
 
