@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
-
-
+import jakarta.validation.Valid;
 
 
 @RestController
@@ -43,12 +42,12 @@ return ResponseEntity.ok(aproveitamentoService.listarPorAlunoESemestre(alunoId,s
 }
 
 @PostMapping("/criar")
-public ResponseEntity<AproveitamentoResponseDTO> criar(@RequestBody AproveitamentoRequestDTO dto){
+public ResponseEntity<AproveitamentoResponseDTO> criar(@RequestBody @Valid  AproveitamentoRequestDTO dto){
 return ResponseEntity.status(HttpStatus.CREATED).body(aproveitamentoService.criar(dto));
 }
 
 @PutMapping("/actualizar/{id}")
-public ResponseEntity<AproveitamentoResponseDTO> actualizar(@PathVariable Long id,@RequestBody AproveitamentoRequestDTO dto){
+public ResponseEntity<AproveitamentoResponseDTO> actualizar(@PathVariable Long id,@RequestBody @Valid AproveitamentoRequestDTO dto){
 return ResponseEntity.ok(aproveitamentoService.actualizar(id,dto));
 }
 
