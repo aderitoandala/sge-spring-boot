@@ -6,23 +6,23 @@ import jakarta.validation.constraints.Max;
 
 public class AproveitamentoRequestDTO {
 
-@NotNull(message="esse campo não pode ser nulo")
+@NotNull(message="o aluno é obrigatório")
 private Long alunoId;
 
-@NotNull(message="esse campo não pode ser nulo")
+@NotNull(message="a disciplina é obrigatória")
 private Long disciplinaId;
 
-@NotNull(message="esse campo não pode ser nulo")
+@NotNull(message="o semetre é obrigatório")
 @Min(value=1, message ="o semestre mínimo deve ser 1")
 @Max(value=8,message="o semestre máximo deve ser 8")
 private Integer semestre;
 
-@NotNull(message="esse campo não pode ser nulo")
+@NotNull(message="a nota é obrigatória")
 @Min(value=0, message="A nota mínima deve ser 0")
 @Max(value=20, message="A nota máxima deve ser 20")
 private Double nota1;
 
-@NotNull(message="esse campo não pode ser nulo")
+@NotNull(message="a nota é obrigatória")
 @Min(value=0, message="A nota mínima deve ser 0")
 @Max(value=20, message="A nota máxima deve ser 20")
 private Double nota2;
