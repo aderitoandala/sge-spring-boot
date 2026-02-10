@@ -9,6 +9,7 @@ import com.mz.sge.entity.DisciplinaEntity;
 import com.mz.sge.dto.AproveitamentoResponseDTO;
 import com.mz.sge.dto.AproveitamentoRequestDTO;
 import com.mz.sge.exception.RecursoNaoEncontradoException;
+import com.mz.sge.exception.ViolacaoIntegridadeException;
 import com.mz.sge.mapper.AproveitamentoMapper;
 import java.util.List;
 
@@ -43,6 +44,9 @@ return AproveitamentoMapper.toDTO( aproveitamentoRepository.findByAlunoIdAndSeme
 public AproveitamentoResponseDTO criar(AproveitamentoRequestDTO dto){
 AlunoEntity aluno=alunoRepository.findById(dto.getAlunoId()).orElseThrow(()-> new RecursoNaoEncontradoException("Aluno não encontrado"));
 DisciplinaEntity disciplina=disciplinaRepository.findById(dto.getDisciplinaId()).orElseThrow(()-> new RecursoNaoEncontradoException("Disciplina não encontrada"));
+if(aproveitamentoRepository.existsByAlunoIdAndDisciplinaIdAndSemestre(dto.getAlunoId(),dto.getDisciplinaId(),dto.getSemestre())){
+throw new ViolacaoIntegridadeException("Esse aproveitamento já existe ");
+}
 AproveitamentoEntity ap=new AproveitamentoEntity();
 ap.setAluno(aluno);
 ap.setDisciplina(disciplina);
@@ -53,6 +57,9 @@ return AproveitamentoMapper.toDTO(aproveitamentoRepository.save(ap));
 }
 
 public AproveitamentoResponseDTO actualizar(Long id,AproveitamentoRequestDTO dto){
+if(aproveitamentoRepository.existsByAlunoIdAndDisciplinaIdAndSemestre(dto.getAlunoId(),dto.getDisciplinaId(),dto.getSemestre())){
+throw new ViolacaoIntegridadeException("Esse aproveitamento já existe ");
+}
 AproveitamentoEntity ap=aproveitamentoRepository.findById(id).orElseThrow(()-> new RecursoNaoEncontradoException("Aproveitamento não encontrado"));
 AlunoEntity aluno=alunoRepository.findById(dto.getAlunoId()).orElseThrow(()-> new RecursoNaoEncontradoException("Aluno não encontrado"));
 DisciplinaEntity disciplina=disciplinaRepository.findById(dto.getDisciplinaId()).orElseThrow(()-> new RecursoNaoEncontradoException("Disciplina não encontrada"));
