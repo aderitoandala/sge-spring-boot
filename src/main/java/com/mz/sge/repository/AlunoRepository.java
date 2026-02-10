@@ -5,4 +5,7 @@ import java.util.List;
 
 public interface AlunoRepository extends JpaRepository<AlunoEntity,Long>{
 List<AlunoEntity>findByNome(String nome);
+boolean existsByEmail(String email);
+
+
 }
