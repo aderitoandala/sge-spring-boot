@@ -48,7 +48,7 @@ DisciplinaResponseDTO alunoCriado=disciplinaService.criar(dto);
 return ResponseEntity.status(HttpStatus.CREATED).body(alunoCriado);
 }
 
-@PutMapping("/actualizar")
+@PutMapping("/actualizar/{id}")
 public ResponseEntity<DisciplinaResponseDTO> actualizar(@PathVariable Long id,@RequestBody @Valid  DisciplinaRequestDTO dto){
 return ResponseEntity.ok(disciplinaService.actualizar(id,dto));
 }

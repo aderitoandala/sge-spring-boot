@@ -7,8 +7,8 @@ import jakarta.validation.constraints.Email;
 
 public class AlunoRequestDTO{
 
-@NotNull(message="Nome não pode ser nulo")
-@NotBlank(message="O nome deve ser explícito")
+@NotNull(message="o nome é obrigatório")
+@NotBlank(message="o nome não pode estar vazio")
 private String nome;
 
 private Sexo sexo;

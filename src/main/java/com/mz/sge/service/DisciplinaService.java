@@ -1,22 +1,24 @@
-  package com.mz.sge.service;
-  import com.mz.sge.repository.DisciplinaRepository;
-  import org.springframework.stereotype.Service;
-   import com.mz.sge.entity.DisciplinaEntity;
-  import java.util.List;
-  import com.mz.sge.exception.RecursoNaoEncontradoException;
-  import com.mz.sge.dto.DisciplinaResponseDTO;
-  import com.mz.sge.dto.DisciplinaRequestDTO;
- import com.mz.sge.mapper.DisciplinaMapper;
-  //import lombok.AllArgsConstructor;
+package com.mz.sge.service;
+import com.mz.sge.repository.DisciplinaRepository;
+import com.mz.sge.repository.AproveitamentoRepository;
+import org.springframework.stereotype.Service;
+import com.mz.sge.entity.DisciplinaEntity;
+import java.util.List;
+import com.mz.sge.exception.RecursoNaoEncontradoException;
+import com.mz.sge.exception.ViolacaoIntegridadeException;
+import com.mz.sge.dto.DisciplinaResponseDTO;
+import com.mz.sge.dto.DisciplinaRequestDTO;
+import com.mz.sge.mapper.DisciplinaMapper;
+  
+@Service
+public class DisciplinaService{
 
+private final DisciplinaRepository disciplinaRepository;
+private final AproveitamentoRepository aproveitamentoRepository;
 
-  @Service
-  public class DisciplinaService{
-
-  private final DisciplinaRepository disciplinaRepository;
-
-  public DisciplinaService(DisciplinaRepository disciplinaRepository){
-  this.disciplinaRepository=disciplinaRepository;
+public DisciplinaService(DisciplinaRepository disciplinaRepository,AproveitamentoRepository aproveitamentoRepository){
+this.disciplinaRepository=disciplinaRepository;
+this.aproveitamentoRepository=aproveitamentoRepository;
 }
 
 public List<DisciplinaResponseDTO> listarTodas(){
@@ -32,10 +34,16 @@ public List<DisciplinaResponseDTO> listarPorNome(String nome){
 }
 
 public DisciplinaResponseDTO criar(DisciplinaRequestDTO dto){
+if(disciplinaRepository.existsByNome(dto.getNome())){
+throw new ViolacaoIntegridadeException("Já existe uma disciplina cok o nome:"+dto.getNome());
+}
   return  DisciplinaMapper.toDTO( disciplinaRepository.save(DisciplinaMapper.toEntity(dto)));
 }
 
 public DisciplinaResponseDTO actualizar(Long id,DisciplinaRequestDTO dto){
+if(disciplinaRepository.existsByNome(dto.getNome())){
+ throw new ViolacaoIntegridadeException("Já existe uma disciplina com o nome:"+dto.getNome());
+}
 DisciplinaEntity d= disciplinaRepository.findById(id).orElseThrow(()-> new RecursoNaoEncontradoException("Disciplina não encontrada"));
 d.setNome(dto.getNome());
 d.setDescricao(dto.getDescricao());
@@ -43,6 +51,9 @@ d.setDescricao(dto.getDescricao());
 }
 
 public void apagar(Long id){
+if(aproveitamentoRepository.existsByDisciplinaId(id)){
+throw new ViolacaoIntegridadeException("Não é possível apagar esse registro");
+}
 if(!disciplinaRepository.existsById(id)){
 throw new RecursoNaoEncontradoException("Disciplina não encontrada com id"+" "+id); 
 }

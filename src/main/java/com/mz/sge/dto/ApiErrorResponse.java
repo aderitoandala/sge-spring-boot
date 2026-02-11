@@ -4,15 +4,15 @@ import java.time.LocalDateTime;
 
 public class ApiErrorResponse{
 private int status;
-private String error;
+private String title;
 private String message;
 private String path;
 private LocalDateTime timestamp;
 
 
-public ApiErrorResponse(int status, String error,String message,String path){
+public ApiErrorResponse(int status, String title,String message,String path){
 this.status=status;
-this.error=error;
+this.title=title;
 this.message=message;
 this.path=path;
 this.timestamp=LocalDateTime.now();
@@ -26,13 +26,14 @@ public int getStatus(){
 return status;
 }
 
-public String getError(){
-return error;
-}
-
 public String getMessage(){
 return message;
 }
+
+public String getTitle(){
+return title;
+}
+
 
 public String getPath(){
 return path;
