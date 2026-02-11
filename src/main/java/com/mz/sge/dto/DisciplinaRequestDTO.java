@@ -5,9 +5,9 @@ import jakarta.validation.constraints.Size;
 
 public class DisciplinaRequestDTO{
 
-@NotNull
-@NotBlank
-@Size(max=20)
+@NotNull(message="o nome é obrigatório")
+@NotBlank(message="o nome não pode estar em branco")
+@Size(max=20,message="o nome deve ter até no máximo 20 caracteres ")
 private String nome;
 private String descricao;
 

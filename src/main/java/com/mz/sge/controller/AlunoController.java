@@ -55,7 +55,7 @@ return ResponseEntity.status(HttpStatus.CREATED).body(alunoCriado);
 }
 
 
-@PutMapping("/actualizar/id/{id}")
+@PutMapping("/actualizar/{id}")
 public ResponseEntity <AlunoResponseDTO>  actualizar(@PathVariable Long id,@RequestBody @Valid  AlunoRequestDTO  dto){
 AlunoResponseDTO alunoActualizado=alunoService.actualizar(id,dto);
 return ResponseEntity.ok(alunoActualizado);
