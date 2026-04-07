@@ -10,6 +10,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.Customizer;
+import org.springframework.http.HttpMethod;
 
 
 
@@ -23,6 +24,7 @@ return httpSecurity
 .csrf(csrf->csrf.disable())
 .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 .authorizeHttpRequests(auth->auth
+.requestMatchers(HttpMethod.POST,"/auth/register").permitAll()
 .anyRequest().authenticated()
 )
 
