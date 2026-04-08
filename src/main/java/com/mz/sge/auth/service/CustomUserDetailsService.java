@@ -8,6 +8,7 @@ import com.mz.sge.auth.dto.UserRegisterDTO;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import com.mz.sge.auth.user.CustomUser;
 import com.mz.sge.auth.user.UserRole;
+import com.mz.sge.auth.exception.UserAlreadyExistsException;
 
 
 @Service
@@ -29,6 +30,9 @@ return userRepository.findByUsername(username).orElseThrow(()-> new UsernameNotF
 
 
 public void registerUser(UserRegisterDTO data){
+if(userRepository.existsByUsername(data.username())){
+	throw new UserAlreadyExistsException();
+}
 
 String encodedPassword= passwordEncoder.encode(data.password());
 CustomUser newUser= new CustomUser(data.username(),encodedPassword,UserRole.USER);
