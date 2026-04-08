@@ -6,7 +6,9 @@ import com.mz.sge.auth.user.CustomUser;
 
 public interface UserRepository extends JpaRepository<CustomUser,String>{
 
-Optional<UserDetails> findByUsername(String username);
+	Optional<UserDetails> findByUsername(String username);
+
+	boolean existsByUsername(String username);
 
 }
 
