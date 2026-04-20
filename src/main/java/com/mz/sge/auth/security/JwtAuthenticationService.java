@@ -37,7 +37,7 @@ String token =JWT.create()
 
 } catch(JWTCreationException ex){
 
-throw new TokenGenerationException("error while generating token");
+throw new TokenGenerationException("Erro ao gerar token");
 
 }
 }
