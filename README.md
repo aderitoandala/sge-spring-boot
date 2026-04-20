@@ -63,12 +63,12 @@ cd sge-spring-boot
 
 # 2. Configurar a base de dados
 # Editar src/main/resources/application.properties com as tuas credenciais:
-# spring.datasource.url=jdbc:mariadb://localhost:3306/sge
+# spring.datasource.url=jdbc:mariadb://localhost:3306/db_sge
 # spring.datasource.username=SEU_USUARIO
 # spring.datasource.password=SUA_SENHA
 
 # 3. Criar a base de dados
-# No MariaDB: CREATE DATABASE sge;
+# No MariaDB: CREATE DATABASE db_sge;
 
 # 4. Executar o projecto
 ./mvnw spring-boot:run
