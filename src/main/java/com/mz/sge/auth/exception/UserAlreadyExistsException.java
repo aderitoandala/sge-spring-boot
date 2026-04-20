@@ -4,7 +4,7 @@ public class UserAlreadyExistsException extends RuntimeException{
 
 public UserAlreadyExistsException(){
 
-	super("Registration failed");
+	super("Registro sem sucesso");
 }
 
 public UserAlreadyExistsException(String message){
