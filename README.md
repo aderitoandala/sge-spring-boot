@@ -133,10 +133,10 @@ src/
 | PUT | `/aproveitamentos/{id}` | Actualizar aproveitamento | ✅ |
 | DELETE | `/aproveitamentos/{id}` | Remover aproveitamento | ✅ |
 
-> *Os endpoints e paths podem variar conforme a implementação actual. Actualizar após adicionar Swagger.*
+
 
 ---
-
+> *Os endpoints podem ser testados através do postman ou qualquer outro consumidor de APIs.*
 ## 👨‍💻 Autor
 
 **Adérito Andala**
