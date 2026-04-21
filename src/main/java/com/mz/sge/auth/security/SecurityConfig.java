@@ -11,12 +11,21 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.Customizer;
 import org.springframework.http.HttpMethod;
+import com.mz.sge.auth.security.JwtAuthenticationFilter;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
 
 
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig{
+
+private final JwtAuthenticationFilter jwtAuthenticationFilter;
+
+public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter){
+this.jwtAuthenticationFilter=jwtAuthenticationFilter;
+}
 
 @Bean
 public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity)throws Exception{
@@ -25,10 +34,11 @@ return httpSecurity
 .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 .authorizeHttpRequests(auth->auth
 .requestMatchers(HttpMethod.POST,"/auth/register").permitAll()
+.requestMatchers(HttpMethod.POST,"/auth/login").permitAll()
 .anyRequest().authenticated()
 )
 
-.httpBasic(Customizer.withDefaults())
+.addFilterBefore(jwtAuthenticationFilter,UsernamePasswordAuthenticationFilter.class)
 .build();
 
 }
