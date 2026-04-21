@@ -1,13 +1,13 @@
 # SGE — Sistema de Gestão Escolar
 
-> API REST para gestão de dados do ensino básico no Sistema Nacional de Ensino de Moçambique.
+> API REST para gestão de dados no ensino básico do Sistema Nacional de Ensino de Moçambique.
 
 ---
 
 ## 📋 Sobre o Projecto
 
 O **SGE** é uma API REST desenvolvida em Java com Spring Boot, desenhada para suportar as necessidades administrativas e pedagógicas do ensino básico. A aplicação permite armazenar e manipular dados de alunos, disciplinas, aproveitamentos e matrículas, com lógica integrada para cálculo de médias e definição da situação académica do aluno.
-A API segue uma arquitectura em camadas com tratamento centralizado de excepções e mapeamento explícito entre entidades e DTOs
+A API segue uma arquitectura em camadas com tratamento centralizado de excepções e mapeamento explícito entre entidades e DTOs.
 O projecto está em desenvolvimento activo, com novas entidades e funcionalidades a serem adicionadas progressivamente.
 
 ---
