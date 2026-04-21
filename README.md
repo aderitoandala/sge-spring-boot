@@ -119,24 +119,30 @@ src/
 
 | Método | Endpoint | Descrição | Auth |
 |---|---|---|---|
+| POST | `/auth/register` | Registar novo utilizador | ❌ |
 | POST | `/auth/login` | Autenticação e retorno de token | ❌ |
 | GET | `/alunos` | Listar todos os alunos | ✅ |
-| POST | `/alunos` | Registar novo aluno | ✅ |
-| PUT | `/alunos/{id}` | Actualizar aluno | ✅ |
-| DELETE | `/alunos/{id}` | Remover aluno | ✅ |
-| GET | `/disciplinas` | Listar disciplinas | ✅ |
-| POST | `/disciplinas` | Registar disciplina | ✅ |
-| PUT | `/disciplinas/{id}` | Actualizar disciplina | ✅ |
-| DELETE | `/disciplinas/{id}` | Remover disciplina | ✅ |
-| GET | `/aproveitamentos` | Listar aproveitamentos | ✅ |
-| POST | `/aproveitamentos` | Registar aproveitamento | ✅ |
-| PUT | `/aproveitamentos/{id}` | Actualizar aproveitamento | ✅ |
-| DELETE | `/aproveitamentos/{id}` | Remover aproveitamento | ✅ |
-
-
+| GET | `/alunos/id/{id}` | Buscar aluno por ID | ✅ |
+| GET | `/alunos/nome/{nome}` | Buscar aluno por nome | ✅ |
+| POST | `/alunos/criar` | Registar novo aluno | ✅ |
+| PUT | `/alunos/actualizar/{id}` | Actualizar aluno | ✅ |
+| DELETE | `/alunos/apagar/{id}` | Remover aluno | ✅ |
+| GET | `/disciplinas` | Listar todas as disciplinas | ✅ |
+| GET | `/disciplinas/id/{id}` | Buscar disciplina por ID | ✅ |
+| GET | `/disciplinas/nome/{nome}` | Buscar disciplina por nome | ✅ |
+| POST | `/disciplinas/criar` | Registar nova disciplina | ✅ |
+| PUT | `/disciplinas/actualizar/{id}` | Actualizar disciplina | ✅ |
+| DELETE | `/disciplinas/apagar/{id}` | Remover disciplina | ✅ |
+| GET | `/aproveitamentos` | Listar todos os aproveitamentos | ✅ |
+| GET | `/aproveitamentos/id/{id}` | Buscar aproveitamento por ID | ✅ |
+| GET | `/aproveitamentos/aluno/{alunoId}/semestre/{semestre}` | Buscar por aluno e semestre | ✅ |
+| POST | `/aproveitamentos/criar` | Registar aproveitamento | ✅ |
+| PUT | `/aproveitamentos/actualizar/{id}` | Actualizar aproveitamento | ✅ |
+| DELETE | `/aproveitamentos/apagar/{id}` | Remover aproveitamento | ✅ |
 
 ---
-> *Os endpoints podem ser testados através do postman ou qualquer outro consumidor de APIs.*
+> *Os endpoints podem ser consumidos através do **Postman** ou **Insomnia**.*
+> 
 ## 👨‍💻 Autor
 
 **Adérito Andala**
