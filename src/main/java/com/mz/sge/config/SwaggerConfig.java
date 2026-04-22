@@ -1,4 +1,7 @@
 package com.mz.sge.config;
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
@@ -18,7 +21,15 @@ public class SwaggerConfig {
                 .version("v1.0")
                 .contact(new Contact()
                     .name("Adérito Andala")
-                    .url("https://github.com/aderitoandala")));
+                    .url("https://github.com/aderitoandala")))
+		.addSecurityItem(new SecurityRequirement()
+            	.addList("bearerAuth"))
+	        .components(new Components()
+                .addSecuritySchemes("bearerAuth", new SecurityScheme()
+                .name("bearerAuth")
+                .type(SecurityScheme.Type.HTTP)
+                .scheme("bearer")
+                .bearerFormat("JWT")));
     }
 
 
