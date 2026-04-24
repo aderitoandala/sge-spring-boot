@@ -1,4 +1,7 @@
 package com.mz.sge.auth.controller;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import com.mz.sge.auth.dto.UserRegisterDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +20,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import com.mz.sge.auth.exception.TokenGenerationException;
 
 
+@Tag(name = "Auth", description = "Autenticação e Autorização")
 @RestController
 @RequestMapping("/auth")
 public class AuthController{
@@ -33,12 +37,20 @@ this.tokenService=tokenService;
 this.authenticationManager=authenticationManager;
 }
 
+@Operation(summary = "Registar novo usuário com role USER")
+@ApiResponse(responseCode = "201",description = "Usuário Registado")
+@ApiResponse(responseCode = "409",description = "Usuário já existe")
+@ApiResponse(responseCode = "400",description = "Dados inválidos")
 @PostMapping("/register")
 public ResponseEntity<Void> registerUser(@RequestBody UserRegisterDTO data){
 this.userService.registerUser(data);
 return ResponseEntity.status(HttpStatus.CREATED).build();
 }
 
+@Operation(summary = "Login")
+@ApiResponse(responseCode = "200",description = "Autenticado(token)")
+@ApiResponse(responseCode = "401",description = "Não autenticado")
+@ApiResponse(responseCode = "400",description = "Dados inválidos")
 @PostMapping("/login")
 public ResponseEntity<LoginResponseDTO>login(@RequestBody @Valid LoginRequestDTO data){
 var auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(data.username(),data.password()));
