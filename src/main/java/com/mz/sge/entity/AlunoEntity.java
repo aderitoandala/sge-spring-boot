@@ -2,7 +2,7 @@ package com.mz.sge.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
-  import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,8 +16,6 @@ import com.mz.sge.enums.Sexo;
 import java.util.List;
 
 
-//@Getter
-//@Setter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Entity

@@ -1,20 +1,19 @@
-
-  package com.mz.sge.entity;
-  import jakarta.persistence.Entity;
-  import jakarta.persistence.Table;
-  import jakarta.persistence.Column;
-  import jakarta.persistence.OneToMany;
-  import jakarta.persistence.Id;
-  import jakarta.persistence.GeneratedValue;
-  import jakarta.persistence.GenerationType;
-  import lombok.NoArgsConstructor;
-  import lombok.AccessLevel;
- import lombok.AllArgsConstructor;
- import java.io.Serializable;
+package com.mz.sge.entity;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import lombok.NoArgsConstructor;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import java.io.Serializable;
 import java.util.List;
 
- //@Getter
- //@Setter
+ 
+
  @AllArgsConstructor
  @NoArgsConstructor(access = AccessLevel.PUBLIC)
  @Entity
