@@ -5,7 +5,7 @@
         <parent>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-parent</artifactId>
-                <version>3.5.7</version>
+                <version>3.5.14</version>
                 <relativePath/>
         </parent>
         <groupId>com.mz.sge</groupId>
@@ -28,6 +28,7 @@
         </scm>
         <properties>
                 <java.version>17</java.version>
+                <flyway.version>11.20.3</flyway.version>
         </properties>
         <dependencies>
                 <dependency>
