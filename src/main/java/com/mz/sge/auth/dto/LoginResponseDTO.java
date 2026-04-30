@@ -1,6 +1,4 @@
 package com.mz.sge.auth.dto;
 
-public record LoginResponseDTO(String token){}
-
-
-
+public record LoginResponseDTO(String token) {
+}

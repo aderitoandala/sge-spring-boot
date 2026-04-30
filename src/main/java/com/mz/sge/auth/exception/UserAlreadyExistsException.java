@@ -1,16 +1,15 @@
 package com.mz.sge.auth.exception;
 
-public class UserAlreadyExistsException extends RuntimeException{
+public class UserAlreadyExistsException extends RuntimeException {
 
-public UserAlreadyExistsException(){
+	public UserAlreadyExistsException() {
 
-	super("Registro sem sucesso");
-}
+		super("Registro sem sucesso");
+	}
 
-public UserAlreadyExistsException(String message){
+	public UserAlreadyExistsException(String message) {
 
-	super(message);
-}
-
+		super(message);
+	}
 
 }

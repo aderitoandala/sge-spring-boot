@@ -1,10 +1,10 @@
 package com.mz.sge.exception;
-public class RecursoNaoEncontradoException extends RuntimeException{
 
-public RecursoNaoEncontradoException(String message){
+public class RecursoNaoEncontradoException extends RuntimeException {
 
-super(message);
-}
+	public RecursoNaoEncontradoException(String message) {
 
+		super(message);
+	}
 
 }

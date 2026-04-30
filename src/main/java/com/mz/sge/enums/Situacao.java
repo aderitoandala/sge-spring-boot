@@ -1,6 +1,7 @@
 package com.mz.sge.enums;
-public enum Situacao{
 
-APROVADO,REPROVADO;
+public enum Situacao {
+
+	APROVADO, REPROVADO;
 
 }
