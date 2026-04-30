@@ -1,66 +1,50 @@
 package com.mz.sge.auth.security;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.config.Customizer;
-import org.springframework.http.HttpMethod;
-import com.mz.sge.auth.security.JwtAuthenticationFilter;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-
-
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig{
+public class SecurityConfig {
 
-private final JwtAuthenticationFilter jwtAuthenticationFilter;
+	private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter){
-this.jwtAuthenticationFilter=jwtAuthenticationFilter;
-}
+	public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter) {
+		this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+	}
 
-@Bean
-public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity)throws Exception{
-return httpSecurity
-.csrf(csrf->csrf.disable())
-.sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-.authorizeHttpRequests(auth->auth
-.requestMatchers(HttpMethod.POST,"/auth/register").permitAll()
-.requestMatchers(HttpMethod.POST,"/auth/login").permitAll()
-.requestMatchers(
-    "/swagger-ui/**",
-    "/v3/api-docs/**",
-    "/swagger-ui.html"
-).permitAll()
-.anyRequest().authenticated()
-)
+	@Bean
+	SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+		return httpSecurity.csrf(csrf -> csrf.disable())
+				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				.authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
+						.requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
+						.requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
+						.anyRequest().authenticated())
 
-.addFilterBefore(jwtAuthenticationFilter,UsernamePasswordAuthenticationFilter.class)
-.build();
+				.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class).build();
 
-}
+	}
 
+	@Bean
+	AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+			throws Exception {
+		return authenticationConfiguration.getAuthenticationManager();
+	}
 
-
-
-@Bean
-AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)throws Exception{
-return authenticationConfiguration.getAuthenticationManager();
-}
-
-@Bean
-PasswordEncoder passwordEncoder(){
-return new BCryptPasswordEncoder();
-}
-
-
+	@Bean
+	PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
 }

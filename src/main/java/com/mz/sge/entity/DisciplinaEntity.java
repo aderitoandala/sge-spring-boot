@@ -1,75 +1,72 @@
+package com.mz.sge.entity;
 
-  package com.mz.sge.entity;
-  import jakarta.persistence.Entity;
-  import jakarta.persistence.Table;
-  import jakarta.persistence.Column;
-  import jakarta.persistence.OneToMany;
-  import jakarta.persistence.Id;
-  import jakarta.persistence.GeneratedValue;
-  import jakarta.persistence.GenerationType;
-  import lombok.NoArgsConstructor;
-  import lombok.AccessLevel;
- import lombok.AllArgsConstructor;
- import java.io.Serializable;
+import java.io.Serializable;
 import java.util.List;
 
- //@Getter
- //@Setter
- @AllArgsConstructor
- @NoArgsConstructor(access = AccessLevel.PUBLIC)
- @Entity
- @Table(name ="DISCIPLINA")
- public class DisciplinaEntity implements Serializable {
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
- private static final long serialVersionUID=1L;
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
+@Entity
+@Table(name = "disciplina")
+public class DisciplinaEntity implements Serializable {
 
- @Id
- @GeneratedValue(strategy= GenerationType.IDENTITY)
- private Long id;
+	private static final long serialVersionUID = 1L;
 
- @Column(nullable=false,length=20,unique=true)
- private String nome;
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "disciplina_seq")
+	@SequenceGenerator(name = "disciplina_seq", sequenceName = "disciplina_seq", initialValue = 1, allocationSize = 1)
+	private Long id;
 
-@Column(length=100)
- private String descricao;
+	@Column(nullable = false, length = 20, unique = true)
+	private String nome;
 
-@OneToMany(mappedBy="disciplina")
-private List<AproveitamentoEntity> aproveitamentos;
+	@Column(length = 100)
+	private String descricao;
 
- public String getDescricao() {
-      return this.descricao;
- }
+	@OneToMany(mappedBy = "disciplina")
+	private List<AproveitamentoEntity> aproveitamentos;
 
- public void setDescricao(String descricao) {
-      this.descricao=descricao;
- }
+	public String getDescricao() {
+		return this.descricao;
+	}
 
- public Long getId() {
-     return this.id;
- }
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
 
-public void setId(Long id){
-this.id=id;
-}
+	public Long getId() {
+		return this.id;
+	}
 
- public String getNome(){
- return this.nome;
- }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
- public void setNome(String nome){
- this.nome=nome;
- }
+	public String getNome() {
+		return this.nome;
+	}
 
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-public List<AproveitamentoEntity> getAproveitamentos(){
-return aproveitamentos;
-}
+	public List<AproveitamentoEntity> getAproveitamentos() {
+		return aproveitamentos;
+	}
 
-public void  setAproveitamentos(List<AproveitamentoEntity> aproveitamentos){
-this.aproveitamentos= aproveitamentos;
-}
-
-
-
+	public void setAproveitamentos(List<AproveitamentoEntity> aproveitamentos) {
+		this.aproveitamentos = aproveitamentos;
+	}
 
 }
