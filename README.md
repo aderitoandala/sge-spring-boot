@@ -4,10 +4,21 @@
 
 ---
 
+## 🌐 Demo
+
+- **API:** https://sge-spring-boot.onrender.com
+- **Swagger:** https://sge-spring-boot.onrender.com/swagger-ui/index.html
+
+> ⚠️ Alojado no plano gratuito do Render — pode demorar até 50 segundos a responder após período de inactividade.
+
+---
+
 ## 📋 Sobre o Projecto
 
 O **SGE** é uma API REST desenvolvida em Java com Spring Boot, desenhada para suportar as necessidades administrativas e pedagógicas do ensino básico. A aplicação permite armazenar e manipular dados de alunos, disciplinas, aproveitamentos e matrículas, com lógica integrada para cálculo de médias e definição da situação académica do aluno.
+
 A API segue uma arquitectura em camadas com tratamento centralizado de excepções e mapeamento explícito entre entidades e DTOs.
+
 O projecto está em desenvolvimento activo, com novas entidades e funcionalidades a serem adicionadas progressivamente.
 
 ---
@@ -17,17 +28,15 @@ O projecto está em desenvolvimento activo, com novas entidades e funcionalidade
 - **Alunos** — Registar, visualizar, actualizar e remover alunos
 - **Disciplinas** — Gestão completa de disciplinas
 - **Aproveitamentos** — Registo de notas com cálculo automático de média e definição de situação (aprovado/reprovado)
-- **Autenticação** — Login com Spring Security e JWT (retorno de token para acesso protegido)
+- **Autenticação** — Registo e login com Spring Security e JWT (retorno de token para acesso protegido)
 
 ---
 
 ## 🔜 Próximos Passos
 
-- [ ] Documentação da API com Swagger / OpenAPI
 - [ ] Entidade Turmas
 - [ ] Entidade Professores
 - [ ] Integração de Turmas e Professores com entidades existentes
-- [ ] Migração para PostgreSQL (planeada)
 
 ---
 
@@ -36,12 +45,15 @@ O projecto está em desenvolvimento activo, com novas entidades e funcionalidade
 | Tecnologia | Versão | Função |
 |---|---|---|
 | Java | 17 | Linguagem principal |
-| Spring Boot | 3.5.7 | Framework base |
+| Spring Boot | 3.5.x | Framework base |
 | Spring Web | — | Camada REST |
 | Spring Security | 6.x | Segurança e controlo de acesso |
 | JWT | — | Autenticação stateless |
 | JPA / Hibernate | — | Persistência e ORM |
-| MariaDB | 12.1.2 | Base de dados (migração para PostgreSQL planeada) |
+| PostgreSQL | 18.2 | Base de dados |
+| Flyway | 11.20.3 | Migrações da base de dados |
+| SpringDoc OpenAPI | — | Documentação da API (Swagger) |
+| Docker | — | Containerização |
 | Git | — | Controlo de versões |
 
 ---
@@ -51,8 +63,19 @@ O projecto está em desenvolvimento activo, com novas entidades e funcionalidade
 ### Pré-requisitos
 
 - Java 17+
-- MariaDB instalado e a correr
+- PostgreSQL instalado e a correr
 - Maven
+
+### Variáveis de Ambiente
+
+Define as seguintes variáveis de ambiente antes de executar:
+
+```bash
+export DATABASE_URL=jdbc:postgresql://localhost:5432/db_sge
+export DATABASE_USERNAME=SEU_USUARIO
+export DATABASE_PASSWORD=SUA_SENHA
+export JWT_SECRET=SEU_SECRET
+```
 
 ### Passos
 
@@ -61,20 +84,16 @@ O projecto está em desenvolvimento activo, com novas entidades e funcionalidade
 git clone https://github.com/aderitoandala/sge-spring-boot.git
 cd sge-spring-boot
 
-# 2. Configurar a base de dados
-# Editar src/main/resources/application.properties com as tuas credenciais:
-# spring.datasource.url=jdbc:mariadb://localhost:3306/bd_sge
-# spring.datasource.username=SEU_USUARIO
-# spring.datasource.password=SUA_SENHA
+# 2. Criar a base de dados
+# No PostgreSQL: CREATE DATABASE db_sge;
 
-# 3. Criar a base de dados
-# No MariaDB: CREATE DATABASE bd_sge;
-
-# 4. Executar o projecto
-./mvnw spring-boot:run
+# 3. Executar o projecto
+mvn spring-boot:run
 ```
 
 A API estará disponível em `http://localhost:8080`.
+
+> O Flyway aplica automaticamente as migrações ao arrancar.
 
 ---
 
@@ -82,9 +101,10 @@ A API estará disponível em `http://localhost:8080`.
 
 A API utiliza autenticação via **JWT**. Para aceder aos endpoints protegidos:
 
-1. Fazer login no endpoint `/auth/login` com as credenciais
-2. Receber o token JWT na resposta
-3. Incluir o token no header de cada requisição:
+1. Criar conta no endpoint `/auth/register`
+2. Fazer login no endpoint `/auth/login` com as credenciais
+3. Receber o token JWT na resposta
+4. Incluir o token no header de cada requisição:
 
 ```
 Authorization: Bearer <token>
@@ -99,6 +119,7 @@ src/
 └── main/
     ├── java/com/mz/sge/
     │   ├── auth/           # Autenticação e JWT
+    │   ├── config/         # Configurações (Swagger)
     │   ├── controller/     # Endpoints REST
     │   ├── dto/            # Objectos de transferência de dados
     │   ├── entity/         # Entidades JPA
@@ -108,6 +129,7 @@ src/
     │   ├── repository/     # Acesso a dados (JPA)
     │   └── service/        # Lógica de negócio
     └── resources/
+        ├── db/migration/   # Scripts Flyway
         └── application.properties
 ```
 
@@ -115,7 +137,7 @@ src/
 
 ## 📌 Endpoints Disponíveis
 
-> ⚠️ Documentação completa via Swagger em breve.
+> 📄 Documentação completa disponível via [Swagger](https://sge-spring-boot.onrender.com/swagger-ui/index.html).
 
 | Método | Endpoint | Descrição | Auth |
 |---|---|---|---|
@@ -141,8 +163,7 @@ src/
 | DELETE | `/aproveitamentos/apagar/{id}` | Remover aproveitamento | ✅ |
 
 ---
-> *Os endpoints podem ser consumidos através do **Postman** ou **Insomnia**.*
-> 
+
 ## 👨‍💻 Autor
 
 **Adérito Andala**
