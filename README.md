@@ -101,9 +101,22 @@ A API estará disponível em `http://localhost:8080`.
 
 A API utiliza autenticação via **JWT**. Para aceder aos endpoints protegidos:
 
+### Via Swagger
+
 1. Criar conta no endpoint `/auth/register`
 2. Fazer login no endpoint `/auth/login` com as credenciais
-3. Receber o token JWT na resposta
+3. Copiar o token JWT retornado na resposta
+4. Clicar no botão **Authorize** 🔓 no topo da página do Swagger
+5. Colar o token no campo **bearerAuth** e clicar em **Close**
+6. A partir deste momento todos os endpoints protegidos ficam acessíveis
+
+> ⚠️ Sem este passo, os endpoints protegidos retornam **401 Unauthorized**.
+
+### Via Postman / Insomnia
+
+1. Criar conta no endpoint `/auth/register`
+2. Fazer login no endpoint `/auth/login` com as credenciais
+3. Copiar o token JWT retornado na resposta
 4. Incluir o token no header de cada requisição:
 
 ```
