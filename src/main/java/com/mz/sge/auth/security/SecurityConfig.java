@@ -3,6 +3,7 @@ package com.mz.sge.auth.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -29,8 +30,20 @@ public class SecurityConfig {
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
 						.requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
-						.requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
+						.requestMatchers("/","/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
 						.anyRequest().authenticated())
+
+		// tratamento de excepções de segurança
+		.exceptionHandling(ex->ex
+
+		// 1.AuthenticationException(usuário não auntenticado- 401)
+		.authenticationEntryPoint((request,response,authException)->
+	         response.sendError(HttpServletResponse.SC_UNAUTHORIZED))
+
+		// 2.AccessDeniedException(usuário autenticado, mas sem permissão - 403)
+		.accessDeniedHandler((request,response,authException)->
+	         response.sendError(HttpServletResponse.SC_FORBIDDEN))
+					)
 
 				.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class).build();
 

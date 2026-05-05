@@ -45,7 +45,7 @@ public class AuthController {
 	@ApiResponse(responseCode = "409", description = "Usuário já existe")
 	@ApiResponse(responseCode = "400", description = "Dados inválidos")
 	@PostMapping("/register")
-	public ResponseEntity<Void> registerUser(@RequestBody UserRegisterDTO data) {
+	public ResponseEntity<Void> registerUser(@RequestBody  @Valid UserRegisterDTO data) {
 		this.userService.registerUser(data);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
