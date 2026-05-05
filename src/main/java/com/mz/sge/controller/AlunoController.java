@@ -22,7 +22,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
-@Tag(name = "Alunos", description = "Gestão de alunos")
+@Tag(name = "2. Alunos", description = "Gestão de alunos")
 @RestController
 @RequestMapping("/alunos")
 public class AlunoController {

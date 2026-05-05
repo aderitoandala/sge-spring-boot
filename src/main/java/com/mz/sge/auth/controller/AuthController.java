@@ -22,7 +22,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
-@Tag(name = "Auth", description = "Autenticação e Autorização")
+@Tag(name = "1. Auth", description = "Autenticação e Autorização")
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
